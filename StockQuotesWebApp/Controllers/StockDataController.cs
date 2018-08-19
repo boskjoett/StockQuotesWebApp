@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockQuotesWebApp.DataProviders;
 using StockQuotesWebApp.Models;
@@ -32,9 +33,9 @@ namespace StockQuotesWebApp.Controllers
 
         // POST: StockData/LoadData
         [HttpPost]
-        public ActionResult LoadData(StockApiRequest viewModel)
+        public async Task<ActionResult> LoadDataAsync(StockApiRequest viewModel)
         {
-            return View("List", stockDataProvider.GetStockData(viewModel.StockId, viewModel.StockExchange, viewModel.FromDate, viewModel.ToDate));
+            return View("List", await stockDataProvider.GetStockDataAsync(viewModel.StockId, viewModel.StockExchange, viewModel.FromDate, viewModel.ToDate));
         }
     }
 }
