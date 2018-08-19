@@ -27,11 +27,19 @@ namespace StockQuotesWebApp.Controllers
         [HttpPost]
         public ActionResult LoadData(StockApiRequest viewModel)
         {
-            StockDataSet stockDataSet = new StockDataSet
+
+
+            return View("List", GenerateDummyStockData());
+        }
+
+
+        private StockDataSet GenerateDummyStockData()
+        {
+            return new StockDataSet
             {
                 Id = "10095279",
-                Name = viewModel.StockId,
-                StockExchange = viewModel.StockExchange,
+                Name = "VOW3_X",
+                StockExchange = "FSE",
                 Description = "Stock Prices for Volkswagen  Vz (VOW3) from the Frankfurt Stock Exchange",
 
                 TimeSeries = new List<StockData>
@@ -62,8 +70,6 @@ namespace StockQuotesWebApp.Controllers
                     }
                 }
             };
-
-            return View("List", stockDataSet);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace StockQuotesWebApp.Models
 
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-//        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+//        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [Required]
         public DateTime FromDate { get; set; }
 

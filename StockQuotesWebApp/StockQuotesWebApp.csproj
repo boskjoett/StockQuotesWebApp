@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Company>Skjoett</Company>
     <Authors>Bo Christian Skjoett</Authors>
+    <UserSecretsId>f270bc68-e164-471e-9370-ee0d3a07e4b0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
