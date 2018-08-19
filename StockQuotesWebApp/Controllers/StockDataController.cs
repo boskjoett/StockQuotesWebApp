@@ -1,12 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using StockQuotesWebApp.DataProviders;
 using StockQuotesWebApp.Models;
 
 namespace StockQuotesWebApp.Controllers
 {
     public class StockDataController : Controller
     {
+        private IStockDataProvider stockDataProvider;
+
+        public StockDataController(IStockDataProvider stockDataProvider)
+        {
+            this.stockDataProvider = stockDataProvider;
+        }
+
         // GET: StockData/Create
         [HttpGet]
         public ActionResult Create()
@@ -27,49 +34,7 @@ namespace StockQuotesWebApp.Controllers
         [HttpPost]
         public ActionResult LoadData(StockApiRequest viewModel)
         {
-
-
-            return View("List", GenerateDummyStockData());
-        }
-
-
-        private StockDataSet GenerateDummyStockData()
-        {
-            return new StockDataSet
-            {
-                Id = "10095279",
-                Name = "VOW3_X",
-                StockExchange = "FSE",
-                Description = "Stock Prices for Volkswagen  Vz (VOW3) from the Frankfurt Stock Exchange",
-
-                TimeSeries = new List<StockData>
-                {
-                    new StockData
-                    {
-                        Date = new DateTime(2018,08,10),
-                        High = 139.72,
-                        Low = 136.54,
-                        Close = 138.74,
-                        TradedVolume = 1226563
-                    },
-                    new StockData
-                    {
-                        Date = new DateTime(2018,08,11),
-                        High = 140.74,
-                        Low = 138.9,
-                        Close = 139.44,
-                        TradedVolume = 995530
-                    },
-                    new StockData
-                    {
-                        Date = new DateTime(2018,08,12),
-                        High = 143.78,
-                        Low = 137.46,
-                        Close = 138.44,
-                        TradedVolume = 1962637
-                    }
-                }
-            };
+            return View("List", stockDataProvider.GetStockData(viewModel.StockId, viewModel.StockExchange, viewModel.FromDate, viewModel.ToDate));
         }
     }
 }
